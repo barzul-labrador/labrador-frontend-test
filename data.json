@@ -100,13 +100,13 @@
  {
   "Name": "Antoine Quintero",
   "Department": "PRODUCTION",
+  "July": -74,
   "January": 203,
-  "February": 461,
   "March": -348,
   "April": 271,
   "May": 375,
-  "June": -162,
-  "July": -74
+  "February": 461,
+  "June": -162
  },
  {
   "Name": "Mayson Ross",

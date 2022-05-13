@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <style>
+        table {
+
+			border-collapse: collapse;
+		}
+
+		thead tr{
+			border-top: dashed blue 2px;
+			border-bottom: dashed blue 2px;
+
+		}
+
+		tbody:before{
+			line-height:2px;
+			content:"\00a0"; 
+			display:block;
+		}
+
+		tr{
+			padding: 30px;
+		}
+
+		tbody tr{
+			border-top: 2px black solid ;
+		}
+
+		tbody tr:nth-child(odd){
+		  background-color: red;
+		}
+
+		tbody tr:nth-child(even){
+		  background-color: #e5e5e5;
+		}
+
+		tbody tr td:first-child{
+			border:1px solid green;
+		}
+
+		tbody tr td:last-child{
+			background-color: white;
+		}
+
+		tbody tr:first-child td{
+			font-size: large;
+		}
+
+
+	</style>
+    <div id="content"></div>
+    <script type="text/javascript" src="data.json"></script>
+    <script type="text/javascript">
+    function sortTheDataByKey() {
+        const key = this.innerHTML;
+        const sortedData = data.sort((a, b) => a[key].localeCompare(b[key]));
+        createTable(sortedData);
+    }
+
+    function changePage() {
+        console.log(this.value)
+        createTable(data, this.value);
+    }
+
+    function createTable(data, index) {
+        index = index || 0;
+
+        let content = document.getElementById("content")
+        // empty the container if needed
+       content.innerHTML = "";
+
+        let pagination = document.createElement("div");
+        pagination.id = "pagination"
+
+        let table = document.createElement("table");
+
+        let tHead = document.createElement("thead");
+
+        let colGroup = document.createElement("colgroup");
+
+        let tBody = document.createElement("tbody");
+
+        let tHeadLine = document.createElement("tr");
+        tHead.append(colGroup);
+        tHead.append(tHeadLine);
+
+        // Array of the tableTitles to index the titles
+        let tableTitles = [];
+
+
+        // add pagination button
+        let page = 1;
+        for (paginationIndex = 0; paginationIndex < data.length; paginationIndex++) {
+
+            if (paginationIndex % 10 == 0 && paginationIndex >= 10) {
+
+                if (paginationIndex == 10) {
+                    let paginationButton = document.createElement("button");
+                    paginationButton.value = 0;
+                    paginationButton.append("Page " + page);
+                    paginationButton.addEventListener("click", changePage);
+                    pagination.append(paginationButton);
+                }
+                page++;
+
+                let paginationButton = document.createElement("button");
+                paginationButton.value = paginationIndex;
+                paginationButton.append("Page " + page);
+                paginationButton.addEventListener("click", changePage);
+                pagination.append(paginationButton);
+
+            }
+        }
+
+        let maxLength = parseFloat(index) + 10;
+        if (maxLength >= data.length) {
+            maxLength = data.length;
+        }
+
+        // look into the data
+        for (let i = index; i < maxLength; i++) {
+
+            const tableInfos = data[i];
+
+            // for each data, we add a new line in the tbody
+            const newLine = document.createElement("tr");
+
+            // get the index of the columnName
+            let columnIndex = 0;
+
+            // For each data in the json get into the informations
+            for (let colunmName in tableInfos) {
+
+                // if the columnName has not bee set yes
+                if (tableTitles.indexOf(colunmName) === -1) {
+
+                    // add a new column to the colgroups
+                    const col = document.createElement("col");
+                    colGroup.append(col)
+
+                    const tHeadTitle = document.createElement("td");
+                    if (colunmName === "Name" || colunmName === "Department") {
+                        tHeadTitle.addEventListener("click", sortTheDataByKey);
+                    }
+
+                    // Add the title to the Array tableTitles
+                    tableTitles.push(colunmName);
+
+                    // And add it to the header
+                    tHeadTitle.append(colunmName);
+                    tHeadLine.append(tHeadTitle);
+
+                }
+
+                // add the value in the new Line
+                const newCell = document.createElement("td");
+                newCell.append(tableInfos[colunmName]);
+                newLine.append(newCell);
+
+                columnIndex++;
+            }
+
+
+            if (columnIndex < tableTitles.length) {
+                for (let i = 0; i < tableTitles.length - columnIndex; i++) {
+                    newLine.append(document.createElement("td"));
+                }
+            }
+
+            tBody.append(newLine);
+
+        }
+
+        table.append(tHead);
+        table.append(tBody);
+        content.append(table);
+        content.append(pagination);
+    }
+
+
+
+    createTable(data);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+/* exo 3 & 5 */
+table tbody tr:not(thead, :last-child, #hide):nth-child(odd) td, tbody tr:first-child {
+    background: red;
+}
+table tbody tr:not(thead, #hide, :last-child):nth-child(even) td {
+    background: #e5e5e5;
+}
+/* exo 4 */
+table tr td {
+    border-top: 2px solid black;
+}
+
+table thead tr th {
+    border-bottom: 2px dashed blue!important;
+    border-top: 2px dashed blue!important;
+}
+
+table tr:not(#hide) td:first-child, table tr th:first-child {border: 1px solid green}
+
+table tbody tr:not(#hide):first-child  {
+    font-weight: bold;
+}
+
+/* exo 5 */
+table tbody tr#hide {
+    display: none;
+}

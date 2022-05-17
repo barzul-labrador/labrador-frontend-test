@@ -21,3 +21,8 @@
 #table tbody tr:nth-child(1) td {
   font-weight: bold;
 }
+
+.btn {
+    font-weight: bold;
+    font-size: 1.2em;
+}

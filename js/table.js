@@ -99,7 +99,7 @@ const fetchData = async () => {
   insertAttributes(table, fistelement);
   datum.sort(compareByName);
   datum.sort(compareByDepartment);
-  localStorage.setItem('data', JSON.stringify(datum));
+  // localStorage.setItem('data', JSON.stringify(datum));
   insertData(table, datum.slice(0, elementToDisplay));
   container.appendChild(table);
   document.body.appendChild(container);
@@ -107,19 +107,37 @@ const fetchData = async () => {
 
 const addButtonPagination = () => {
   const button = document.createElement('button');
+  const btn = document.createElement('button');
+  button.classList.add('btn');
+  btn.classList.add('btn');
+  button.title = 'Next';
+  btn.title = 'Previous';
   button.id = 'button';
-  button.textContent = 'Next';
+  button.textContent = '>>';
+  btn.textContent = '<<';
   button.addEventListener('click', () => {
     const next = elementToDisplay + 10;
-    const nextElement = datum.slice(elementToDisplay, next);
-    elementToDisplay += 10;
-    table.innerHTML = '';
-    insertAttributes(table, datum[0]);
-    insertData(table, nextElement);
+    if (next <= Math.round(datum.length / 10) * 10) {
+      const nextElement = datum.slice(elementToDisplay, next);
+      elementToDisplay += 10;
+      table.innerHTML = '';
+      insertAttributes(table, datum[0]);
+      insertData(table, nextElement);
+    }
   });
+  btn.addEventListener('click', () => {
+    const previous = elementToDisplay - 10;
+    if (previous >= 0) {
+      const previousElement = datum.slice(previous, elementToDisplay);
+      elementToDisplay -= 10;
+      table.innerHTML = '';
+      insertAttributes(table, datum[0]);
+      insertData(table, previousElement);
+    }
+  });
+  container.appendChild(btn);
   container.appendChild(button);
 };
 
 fetchData();
 addButtonPagination();
-console.log('mes donées:', JSON.parse(localStorage.getItem('data')));

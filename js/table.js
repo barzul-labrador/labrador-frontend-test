@@ -1,8 +1,10 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable guard-for-in */
 const table = document.createElement('table');
+const container = document.createElement('div');
+container.id = 'container';
 table.id = 'table';
-console.log('ma table:', table);
+let elementToDisplay = 10;
 let datum = [];
 const colors = ['red', '#e5e5e5', 'green'];
 
@@ -97,8 +99,27 @@ const fetchData = async () => {
   insertAttributes(table, fistelement);
   datum.sort(compareByName);
   datum.sort(compareByDepartment);
-  insertData(table, datum);
-  document.body.appendChild(table);
+  localStorage.setItem('data', JSON.stringify(datum));
+  insertData(table, datum.slice(0, elementToDisplay));
+  container.appendChild(table);
+  document.body.appendChild(container);
+};
+
+const addButtonPagination = () => {
+  const button = document.createElement('button');
+  button.id = 'button';
+  button.textContent = 'Next';
+  button.addEventListener('click', () => {
+    const next = elementToDisplay + 10;
+    const nextElement = datum.slice(elementToDisplay, next);
+    elementToDisplay += 10;
+    table.innerHTML = '';
+    insertAttributes(table, datum[0]);
+    insertData(table, nextElement);
+  });
+  container.appendChild(button);
 };
 
 fetchData();
+addButtonPagination();
+console.log('mes donées:', JSON.parse(localStorage.getItem('data')));

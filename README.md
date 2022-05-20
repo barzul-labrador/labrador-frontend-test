@@ -1,8 +1,8 @@
 # labrador-frontend-test
 
 You have json file "data.json" in parameter. The goal of this exercises is to create a table from it, add stylization and add some functionalities on it.
-First, create a fork of this git repository.
-Add the end, create a pull request of your fork.
+First, create for this project.
+Add the end, create a pull request.
 
 
 First exercise : create a table from the json (in vanillaJs, not manually).

@@ -527,16 +527,16 @@ const createRevenueTableBody = (data) => {
     let { Name, Department, January, February, March, April, May, June, July } =
       revenueData;
     let revenueObj = {
-      Name: Name ? Name : '',
-      Department: Department ? Department : '',
-      January: January ? January : '',
-      February: February ? February : '',
-      March: March ? March : '',
+      Name: Name || '',
+      Department: Department || '',
+      January: January || '',
+      February: February || '',
+      March: March || '',
       QuarterTotal: parseInt(January + February + March) || '',
-      April: April ? April : '',
-      May: May ? May : '',
-      June: June ? June : '',
-      July: July ? July : '',
+      April: April || '',
+      May: May || '',
+      June: June || '',
+      July: July || '',
       SemTotal:
         parseInt(January + February + March + April + May + June + July) || ''
     };

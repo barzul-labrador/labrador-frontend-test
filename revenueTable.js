@@ -504,6 +504,9 @@ let revenueTableHeaderRow = document.createElement('tr');
 let revenueTableBody = document.createElement('tbody');
 let myTable = document.getElementById('table');
 
+//store the index of pagination
+let storeIndex = 0;
+
 const createRevenueTableHeader = () => {
   const revenueTableHeaders = Array.from(
     new Set(...rawData.map((header) => Object.keys(header)))
@@ -556,8 +559,8 @@ const sortColumn = (columnName) => {
   let filteredData = rawData.sort((a, b) => {
     return a[columnName].localeCompare(b[columnName]);
   }, false);
-  paginate(filteredData, 10);
-  createRevenueTableBody(filteredData);
+  let page = paginate(filteredData,10)
+  createRevenueTableBody(page[storeIndex]);
 };
 
 const getColumnName = () => {

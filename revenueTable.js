@@ -590,9 +590,15 @@ const generateList = (pages) => {
       ul.appendChild(li);
       li.addEventListener('click', () => {
         createRevenueTableBody(pages[index - 1]);
+        getIndex(index - 1);
       });
     }
   });
+};
+
+//Store the index of the pagination
+const getIndex = (index) => {
+  storeIndex = index;
 };
 
 let loadRevenueTable = () => {

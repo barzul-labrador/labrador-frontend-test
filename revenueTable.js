@@ -508,7 +508,9 @@ const createRevenueTableHeader = () => {
   const revenueTableHeaders = Array.from(
     new Set(...rawData.map((header) => Object.keys(header)))
   );
+  // Adds a column 'Quarter Total' after the column 'March'
   revenueTableHeaders.splice(5, 0, 'QuarterTotal');
+  // Adds a column 'SemTotal' at the end ie., after column 'July''
   revenueTableHeaders.push('SemTotal');
   revenueTableHeaders.forEach((header) => {
     let revenueTableHeader = document.createElement('th');
@@ -523,6 +525,7 @@ const createRevenueTableHeader = () => {
 };
 
 const createRevenueTableBody = (data) => {
+  revenueTableBody.innerHTML = '';
   data.forEach((revenueData) => {
     let { Name, Department, January, February, March, April, May, June, July } =
       revenueData;

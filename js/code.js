@@ -74,7 +74,7 @@ function generateTable(response)
     // Fifth exercise : add sort
     addSortTable();
 
-    // // Sixth exercise : add pagination on this table.
+    // Sixth exercise : add pagination on this table.
     initPagination();
     addButtonPagination();
     addDataToSourcePagination();

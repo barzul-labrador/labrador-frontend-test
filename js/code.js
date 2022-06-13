@@ -128,6 +128,5 @@ readTextFile("./data.json")
         console.error(err);
     });
 
-
 // Alternative syntax for XMLHttpRequest
 // readTextFile("./data.json");

@@ -6,6 +6,7 @@ var table;
 var header = [];
 var sortRef = {Name: false, Department: false};
 
+// Alternative syntax with asyn function
 /**
  * Read text file using await/async (promise)
  * @param file
@@ -19,6 +20,7 @@ async function readTextFile(file) {
     generateTable(dataJson);
 }
 
+// Alternative syntax with XMLHttpRequest
 // /**
 //  * Read text file using XMLHttpRequest
 //  * @param file
@@ -120,7 +122,12 @@ function refreshTable()
     }
 }
 
+// Alternative syntax with asyn function
 readTextFile("./data.json")
     .catch(function (err) {
         console.error(err);
     });
+
+
+// Alternative syntax for XMLHttpRequest
+// readTextFile("./data.json");
